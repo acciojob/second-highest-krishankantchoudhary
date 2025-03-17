@@ -1,46 +1,31 @@
-<!DOCTYPE html>
+function secondHighest(arr) {
+    if (arr.length < 2) {
+        return -Infinity;
+    }
 
-<html>
+    // Convert input to numbers
+    arr = arr.map(Number);
 
-<head>
-	<link rel="stylesheet" href="styles.css">
-</head>
+    // Sort in ascending order
+    arr.sort((a, b) => a - b);
 
-<body>	
-	<script>
-		function secondHighest(arr) {
-			//Write your code here
-			arr.sort();
-			if(arr.length === 0){
-				return -Infinity;
-			}
-			else if(arr.length===1){
-				return -Infinity;
-			}
-			else if(arr.every(num=>num===arr[0])){
-				return -Infinity;
-			}
-			else{
-				return (arr[arr.length-2]);
-			}
-		}
-		
-		
+    // Find the second highest unique element
+    let highest = arr[arr.length - 1];
+    for (let i = arr.length - 2; i >= 0; i--) {
+        if (arr[i] < highest) {
+            return arr[i];
+        }
+    }
 
-		function Main() {
-			let n = prompt("Enter the number of elements");
-			let arr = [];
-			for (let i = 0; i < n; i++) {
-				arr[i] = prompt("Enter element " + (i+1));
-			}
-			alert(secondHighest(arr));
-		}
-		Main();
-	</script>
+    return -Infinity; // If all elements are the same
+}
 
-    <script type="text/javascript" src="./script.js">
-</script>
-
-</body>
-
-</html>
+function Main() {
+    let n = parseInt(prompt("Enter the number of elements"));
+    let arr = [];
+    for (let i = 0; i < n; i++) {
+        arr[i] = prompt("Enter element " + (i + 1));
+    }
+    alert(secondHighest(arr));
+}
+Main();
